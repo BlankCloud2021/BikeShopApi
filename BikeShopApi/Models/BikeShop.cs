@@ -8,7 +8,6 @@ namespace BikeShopApi.Models
     public class BikeShop
     {
         public int Id { get; set; }
-        public int LocationId { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
         public string AddressLine1 { get; set; }

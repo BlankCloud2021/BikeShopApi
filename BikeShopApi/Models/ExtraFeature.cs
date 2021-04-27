@@ -9,5 +9,6 @@ namespace BikeShopApi.Models
     {
       public int Id { get; set; }   
         public string Feature { get; set;  }
+        public ICollection<Bike> Bikes { get; set; }
     }
 }

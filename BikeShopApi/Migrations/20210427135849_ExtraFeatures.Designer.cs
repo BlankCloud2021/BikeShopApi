@@ -4,14 +4,16 @@ using BikeShopApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BikeShopApi.Migrations
 {
     [DbContext(typeof(BikeShopApiDbContext))]
-    partial class BikeShopApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210427135849_ExtraFeatures")]
+    partial class ExtraFeatures
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,8 +46,14 @@ namespace BikeShopApi.Migrations
                     b.Property<string>("Barcode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("BikeShopLocationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CurrentStoreId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
@@ -53,7 +61,10 @@ namespace BikeShopApi.Migrations
                     b.Property<float>("FrameSize")
                         .HasColumnType("real");
 
-                    b.Property<int>("HomeBikeShopId")
+                    b.Property<int?>("HomeBikeShopId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HomeStoreId")
                         .HasColumnType("int");
 
                     b.Property<string>("Model")
@@ -66,6 +77,8 @@ namespace BikeShopApi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BikeShopLocationId");
 
                     b.HasIndex("CustomerId");
 
@@ -95,6 +108,9 @@ namespace BikeShopApi.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
@@ -283,15 +299,19 @@ namespace BikeShopApi.Migrations
 
             modelBuilder.Entity("BikeShopApi.Models.Bike", b =>
                 {
+                    b.HasOne("BikeShopApi.Models.BikeShop", "BikeShopLocation")
+                        .WithMany()
+                        .HasForeignKey("BikeShopLocationId");
+
                     b.HasOne("BikeShopApi.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
                     b.HasOne("BikeShopApi.Models.BikeShop", "HomeBikeShop")
                         .WithMany()
-                        .HasForeignKey("HomeBikeShopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HomeBikeShopId");
+
+                    b.Navigation("BikeShopLocation");
 
                     b.Navigation("Customer");
 

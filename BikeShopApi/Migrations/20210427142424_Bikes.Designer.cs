@@ -4,14 +4,16 @@ using BikeShopApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BikeShopApi.Migrations
 {
     [DbContext(typeof(BikeShopApiDbContext))]
-    partial class BikeShopApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210427142424_Bikes")]
+    partial class Bikes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +55,7 @@ namespace BikeShopApi.Migrations
                     b.Property<float>("FrameSize")
                         .HasColumnType("real");
 
-                    b.Property<int>("HomeBikeShopId")
+                    b.Property<int?>("HomeBikeShopId")
                         .HasColumnType("int");
 
                     b.Property<string>("Model")
@@ -289,9 +291,7 @@ namespace BikeShopApi.Migrations
 
                     b.HasOne("BikeShopApi.Models.BikeShop", "HomeBikeShop")
                         .WithMany()
-                        .HasForeignKey("HomeBikeShopId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HomeBikeShopId");
 
                     b.Navigation("Customer");
 
