@@ -13,6 +13,7 @@ namespace BikeShopApi.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public int BikeShopId { get; set; } 
+        public BikeShop BikeShop { get; set; }
 
     }
 }
