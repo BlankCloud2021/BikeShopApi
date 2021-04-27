@@ -9,8 +9,9 @@ namespace BikeShopApi.Models
     {
         public int Id { get; set; } 
         public int CurrentLocationId { get; set; }
-        public Location Location { get; set; }
+        public BikeShop CurrentBikeShop { get; set; }
         public int PickUpLocationId { get; set; }
+        public BikeShop PickUpBikeShop { get; set; }
         public DateTime PickUpdate { get; set; }
     }
 }
