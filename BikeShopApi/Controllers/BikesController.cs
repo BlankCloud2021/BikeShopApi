@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BikeShopApi.Models;
-
+using System.ComponentModel.DataAnnotations;
 namespace BikeShopApi.Controllers
 {
     [Route("api/[controller]")]
@@ -79,6 +79,7 @@ namespace BikeShopApi.Controllers
         {
             _context.Bikes.Add(bike);
             await _context.SaveChangesAsync();
+            
 
             return CreatedAtAction("GetBike", new { id = bike.Id }, bike);
         }
